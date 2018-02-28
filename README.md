@@ -7,7 +7,7 @@ npm i -S regraph
 
 # usage (experimenting)
 1)
-```
+```javascript
 // rootReducer.js
 import { graphqlReducer } from 'redux-graphql';
 
