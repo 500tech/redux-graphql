@@ -2,8 +2,8 @@
 Redux GraphQL Integration
 
 # install (suggestions)
-npm i -S redux-graphql
-npm i -S regraph
+`npm i -S redux-graphql`  
+`npm i -S regraph`
 
 # usage (experimenting)
 1)
