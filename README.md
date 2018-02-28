@@ -78,3 +78,35 @@ export const selectFilteredCampaigns = createSelector(
   (campaigns, filter) => ...
 );
 ```
+
+# normalizing
+To be able to normalize we need to know for each resource if it should be normalized and by which key.
+Maybe use special alias in graphql query to denote the key (can you have both an alias and the original attribute)?
+For example:
+
+```graphql
+query getCampaigns() {
+  campaigns {
+    id
+    _redux_key_: id
+    title
+    description
+    publishers {
+      name
+      _redux_key_: name
+      budget
+      ads {
+        id
+        _redux_key_: id
+        image {
+          // doesn't normalize
+          id
+          url
+          width
+          height
+        }
+      }
+    }
+  }
+}
+```
