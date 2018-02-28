@@ -88,16 +88,22 @@ For example:
 query getCampaigns() {
   campaigns {
     id
-    _redux_key_: id
+    __redux_key: id
     title
     description
     publishers {
       name
-      _redux_key_: name
+      __redux_key: name
+      campaignId
+      __foreign_key_campaigns: campaignId
       budget
       ads {
         id
-        _redux_key_: id
+        __redux_key: id
+        publisherId
+        __foreign_key_publishers: publisherId
+        campaignId
+        __foreign_key_campaign: campaignId
         image {
           // doesn't normalize
           id
