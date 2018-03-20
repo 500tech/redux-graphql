@@ -1,0 +1,41 @@
+{
+  "name": "redux-graphql",
+  "version": "1.0.0",
+  "description": "Redux GraphQL Integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server-sample/index.js",
+    "demo": "node store-sample/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/500tech/redux-graphql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/500tech/redux-graphql/issues"
+  },
+  "homepage": "https://github.com/500tech/redux-graphql#readme",
+  "dependencies": {
+    "lodash": "4.17.5"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "axios": "0.18.0",
+    "express": "4.16.2",
+    "express-graphql": "0.6.12",
+    "graphql": "0.13.1",
+    "prettier": "1.11.1",
+    "redux": "3.7.2",
+    "redux-actions": "2.2.1",
+    "webpack": "4.0.1",
+    "whatwg-fetch": "2.0.3"
+  },
+  "peerDependencies": {
+    "redux": ">3"
+  }
+}
