@@ -1,12 +1,25 @@
 # redux-graphql
+
 Redux GraphQL Integration
 
-# install (suggestions)
+# Running demo (NodeJS)
+
+```
+$ npm run server
+$ npm run demo
+```
+
+# Brainstorming
+
+# install
+
 `npm i -S redux-graphql`  
 `npm i -S regraph`
 
-# usage (experimenting)
+# usage
+
 1)
+
 ```javascript
 // rootReducer.js
 import { graphqlReducer } from 'redux-graphql';
@@ -80,6 +93,7 @@ export const selectFilteredCampaigns = createSelector(
 ```
 
 # normalizing
+
 To be able to normalize we need to know for each resource if it should be normalized and by which key.
 Maybe use special alias in graphql query to denote the key (can you have both an alias and the original attribute)?
 For example:
