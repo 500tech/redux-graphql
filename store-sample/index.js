@@ -2,6 +2,8 @@ const { createStore, applyMiddleware } = require('redux');
 const {
   reducer,
   middleware,
+  selectSingle,
+  selectAll,
   graphqlRequestAction,
   graphqlMerge,
   graphqlSet,
@@ -56,23 +58,32 @@ const getCampaignQuery = `query($id:String) {
 const getCampaigns = graphqlRequestAction(getCampaignsQuery);
 const getCampaign = graphqlRequestAction(getCampaignQuery);
 
-store.subscribe(() => console.log(JSON.stringify(store.getState(), null, 2)));
+// store.subscribe(() => console.log(JSON.stringify(store.getState(), null, 2)));
 
 store.dispatch(getCampaign({ id: '1' }));
 store.dispatch(getCampaigns());
 setTimeout(() => {
-  store.dispatch(
-    graphqlSet('Campaign', 10, { name: 'custom campaign', budget: 1000 })
+  console.log(
+    JSON.stringify(
+      selectSingle(store.getState(), 'Campaign', '1', {
+        Publisher: { Ad: { Image: {} } }
+      }),
+      null,
+      4
+    )
   );
-  store.dispatch(
-    graphqlSet('Campaign', 10, { name: 'another custom campaign' })
-  );
-  store.dispatch(graphqlMerge('Campaign', 10, { budget: 2000 }));
-  store.dispatch(graphqlDelete('Campaign', 10));
-  store.dispatch(graphqlMerge('Campaign', 11, { name: 'campaign11' }));
-  store.dispatch(graphqlMerge('Campaign', 12, { name: 'campaign12' }));
-  store.dispatch(graphqlMerge('Campaign', 13, { name: 'campaign13' }));
-  store.dispatch(graphqlMerge('Campaign', 14, { name: 'campaign14' }));
-  store.dispatch(graphqlDelete('Campaign', [11, 12]));
-  store.dispatch(graphqlDeleteAll('Campaign'));
+  // store.dispatch(
+  //   graphqlSet('Campaign', 10, { name: 'custom campaign', budget: 1000 })
+  // );
+  // store.dispatch(
+  //   graphqlSet('Campaign', 10, { name: 'another custom campaign' })
+  // );
+  // store.dispatch(graphqlMerge('Campaign', 10, { budget: 2000 }));
+  // store.dispatch(graphqlDelete('Campaign', 10));
+  // store.dispatch(graphqlMerge('Campaign', 11, { name: 'campaign11' }));
+  // store.dispatch(graphqlMerge('Campaign', 12, { name: 'campaign12' }));
+  // store.dispatch(graphqlMerge('Campaign', 13, { name: 'campaign13' }));
+  // store.dispatch(graphqlMerge('Campaign', 14, { name: 'campaign14' }));
+  // store.dispatch(graphqlDelete('Campaign', [11, 12]));
+  // store.dispatch(graphqlDeleteAll('Campaign'));
 }, 500);

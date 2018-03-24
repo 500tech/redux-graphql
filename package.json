@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/500tech/redux-graphql#readme",
   "dependencies": {
+    "graphql-parser": "2.1.0",
     "lodash": "4.17.5"
   },
   "prettier": {
@@ -29,6 +30,7 @@
     "express": "4.16.2",
     "express-graphql": "0.6.12",
     "graphql": "0.13.1",
+    "graphql-tag": "2.8.0",
     "prettier": "1.11.1",
     "redux": "3.7.2",
     "redux-actions": "2.2.1",

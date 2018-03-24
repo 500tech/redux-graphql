@@ -2,7 +2,6 @@ const axios = require('axios');
 const { REQUEST, graphqlMergeAll } = require('./actions');
 
 const graphqlMiddleware = ({ dispatch }) => next => action => {
-  console.log(JSON.stringify(action, null, 2));
   if (action.type !== REQUEST) {
     return next(action);
   }
