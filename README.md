@@ -9,17 +9,15 @@ $ npm run server
 $ npm run demo
 ```
 
-# Brainstorming
-
 # install
 
 `npm i -S redux-graphql`  
-`npm i -S regraph`
 
 # usage
 
 1)
 
+Include the reducer and middleware:
 ```javascript
 // rootReducer.js
 import { graphqlReducer } from 'redux-graphql';
@@ -34,26 +32,31 @@ middelwares = [
  ...,
  graphqlMiddleware
 ];
-
-// actions
-import { graphqlActionCreator, graphqlSet } from 'redux-graphql';
+```
+Create Request Actions, that will fetch the data, and put it on the store normalized (flat):
+```
+import { graphqlRequestAction } from 'redux-graphql';
 import getCampaignsQuery from './queries/get-campaigns.gql';
 import createCampaignsQuery from './queries/create-campaign.gql';
 
-export const getCampaigns = graphqlActionCreator(getCampaignsQuery);
-
+export const getCampaigns = graphqlRequestAction(getCampaignsQuery);
+```
+Custom success callback, and calling actions that maniuplate the state, directly:
+```
 // Either set the data after create:
 export const createCampaign = graphqlActionCreator(createCampaignsQuery, {
-  then: (data, dispatch) => dispatch(graphqlSet({ resource: 'campaigns', id: data.id, data }))
+  then: (data, dispatch) => dispatch(graphqlSet('Campaign', data.id, data))
 });
 
 // Or call get campaigns again:
 const createCampaign = graphqlActionCreator(getCampaignsQuery, {
   then: (data, dispatch) => dispatch(getCampaigns())
 });
-
+```
+Use the actions and selector in the component:
+```
 // component
-import { graphqlClear } from 'redux-graphql';
+import { selectAll, graphqlDeleteAll } from 'redux-graphql';
 import { getCampaigns, createCampaign } from './actions/campaign-actions';
 
 class CampaignsList extends React.Component {
@@ -63,33 +66,24 @@ class CampaignsList extends React.Component {
   }
   componentWillUnmount() {
     // clear data
-    this.props.graphqlClear('campaigns');
+    this.props.graphqlDeleteAll('Campaign');
   }
   onCreate(campaignData) {
     this.props.createCampaign({ campaign: campaignData }); // Whatever is passed to the action will be used as variables
   }
   render() {
-    { this.props.filteredCampaigns.map(...) }
+    return this.props.campaigns.map(...)
   }
 }
 
 const mapStateToProps = (state) => {
-  filteredCampaigns: selectFilteredCampaigns(state)
+  // get denormalized campaign, with all publishers and their ads:
+  campaigns: selectAll(state.graphql, 'Campaign', { Publisher: { Ad: {} } })
 };
 export default connect(mapStateToProps, {
   getCampaigns,
   graphqlClear
 })(CampaignsList);
-
-// selector
-import { graphqlSelect } from 'redux-graphql';
-import { createSelector } from 'reselect';
-
-export const selectFilteredCampaigns = createSelector(
-  graphqlSelect('campaigns'),
-  get('ui.filter'),
-  (campaigns, filter) => ...
-);
 ```
 
 # normalizing
