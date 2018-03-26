@@ -13,6 +13,13 @@ $ npm run demo
 
 `npm i -S redux-graphql`  
 
+# Concepts
+Query associated models using GraphQL, and automatically keep them normalized in the store:
+<img src="https://lh4.googleusercontent.com/rJc_RYbuc6haxGB05Moi3hxPSJCuTKOcIusrj7tFQpq-j9qC2hsJQWHbhjyDHoEDesyFfxCb7P2CUzhrvCrJ=w1920-h983-rw"/>
+
+Use selectors to query the store and get models back into your components:
+<img src="https://lh4.googleusercontent.com/ln_fOpiQuElUtGvYkxZjUBrUHC1babxC4-GrZweiD64VJvU97M5Wk8vRx-end-wKi2QXSBTKqnjgT2T_kvSK=w1920-h983-rw"/>
+
 # usage
 
 1)
