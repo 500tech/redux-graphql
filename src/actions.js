@@ -49,19 +49,19 @@ const graphqlDeleteAll = (resourceName, recursive = true) => ({
   }
 });
 
-const graphqlRequest = (query, variables, then) => ({
+const graphqlRequest = (query, variables, onSuccess) => ({
   type: REQUEST,
   payload: {
     query,
     variables
   },
   meta: {
-    then
+    onSuccess
   }
 });
 
-const graphqlRequestAction = (query, { then } = {}) => {
-  return variables => graphqlRequest(query, variables, then);
+const graphqlRequestAction = (query, { onSuccess } = {}) => {
+  return variables => graphqlRequest(query, variables, onSuccess);
 };
 
 module.exports = {
