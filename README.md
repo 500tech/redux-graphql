@@ -52,12 +52,12 @@ Custom success callback, and calling actions that maniuplate the state, directly
 ```javascript
 // Either set the data after create:
 export const createCampaign = graphqlActionCreator(createCampaignsQuery, {
-  then: (data, dispatch) => dispatch(graphqlSet('Campaign', data.id, data))
+  onSuccess: (data, dispatch) => dispatch(graphqlSet('Campaign', data.id, data))
 });
 
 // Or call get campaigns again:
 const createCampaign = graphqlActionCreator(getCampaignsQuery, {
-  then: (data, dispatch) => dispatch(getCampaigns())
+  onSuccess: (data, dispatch) => dispatch(getCampaigns())
 });
 ```
 Use the actions and selector in the component:
