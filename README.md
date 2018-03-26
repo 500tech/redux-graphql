@@ -107,16 +107,13 @@ query getCampaigns() {
       __typename
       __redux_key: name
       campaignId
-      __foreign_key_campaigns: campaignId
       budget
       ads {
         id
         __redux_key: id
         __typename
         publisherName
-        __foreign_key_publishers: publisherId
         campaignId
-        __foreign_key_campaign: campaignId
         image {
           // doesn't normalize
           id
@@ -152,7 +149,6 @@ Will be stored like so:
       __typename: 'Publisher',
       __redux_key: 'Google',
       campaignId: 1,
-      __foreign_key_Campaign: 1,
       budget: 1000,
       ads: [
         { __redux_resource: 'Ad', key: 1 }
@@ -165,9 +161,7 @@ Will be stored like so:
     __redux_key: 1,
     __typename: 'Ad',
     publisherName: 'Google',
-    __foreign_key_Publisher: 'Google'
     campaignId: 1,
-    __foreign_key_Campaign: 1,
     image: {
       id: 1,
       url: 'http://my.image',
@@ -202,7 +196,6 @@ Will produce the denormalized object:
       __typename: 'Publisher',
       __redux_key: 'Google',
       campaignId: 1,
-      __foreign_key_Campaign: 1,
       budget: 1000,
       ads: [
         { __redux_resource: 'Ad', key: 1 }
