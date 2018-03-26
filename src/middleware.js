@@ -14,8 +14,8 @@ const graphqlMiddleware = ({ dispatch }) => next => action => {
     })
     .then(({ data }) => data.data)
     .then(data => {
-      if (action.meta.then) {
-        action.meta.then(dispatch);
+      if (action.meta.onSuccess) {
+        action.meta.onSuccess(dispatch);
       } else {
         dispatch(graphqlMergeAll(data));
       }
