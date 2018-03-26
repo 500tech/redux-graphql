@@ -34,7 +34,7 @@ middelwares = [
 ];
 ```
 Create Request Actions, that will fetch the data, and put it on the store normalized (flat):
-```
+```javascript
 import { graphqlRequestAction } from 'redux-graphql';
 import getCampaignsQuery from './queries/get-campaigns.gql';
 import createCampaignsQuery from './queries/create-campaign.gql';
@@ -42,7 +42,7 @@ import createCampaignsQuery from './queries/create-campaign.gql';
 export const getCampaigns = graphqlRequestAction(getCampaignsQuery);
 ```
 Custom success callback, and calling actions that maniuplate the state, directly:
-```
+```javascript
 // Either set the data after create:
 export const createCampaign = graphqlActionCreator(createCampaignsQuery, {
   then: (data, dispatch) => dispatch(graphqlSet('Campaign', data.id, data))
@@ -54,7 +54,7 @@ const createCampaign = graphqlActionCreator(getCampaignsQuery, {
 });
 ```
 Use the actions and selector in the component:
-```
+```javascript
 // component
 import { selectAll, graphqlDeleteAll } from 'redux-graphql';
 import { getCampaigns, createCampaign } from './actions/campaign-actions';
@@ -131,7 +131,7 @@ query getCampaigns() {
 ```
 
 Will be stored like so:
-```js
+```javascript
 {
   Campaign: {
     1: {
@@ -181,7 +181,7 @@ Will be stored like so:
 # Denormalizing using selectors
 Denormalizing using the same graphql strings to instruct the selector which parts should be denormalized.
 For example:
-```
+```javascript
 const denormalizer = {
   Publisher: {}
 }
@@ -189,7 +189,7 @@ const denormalizer = {
 selectGrahpql(state, 'Campaign', 1, denormalizer) // using above state
 ```
 Will produce the denormalized object:
-```
+```javascript
 {
   id: 1,
   __typename: 'Campaign',
